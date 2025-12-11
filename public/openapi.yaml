@@ -16,11 +16,11 @@ paths:
               type: object
               properties:
                 domain: { type: string }
-                from: { type: string }
                 to: { type: array, items: { type: string, format: email } }
                 subject: { type: string }
                 html: { type: string }
                 text: { type: string }
+                from_name: { type: string }
                 reply_to: { type: string }
                 template_code: { type: string }
                 variables: { type: object }

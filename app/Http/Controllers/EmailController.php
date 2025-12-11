@@ -12,7 +12,6 @@ class EmailController extends Controller
     {
         $validated = $request->validate([
             'domain' => ['nullable','string'],
-            'from' => ['nullable','string'],
             'from_name' => ['nullable','string','max:255'],
             'to' => ['required','array','min:1'],
             'to.*' => ['email'],
