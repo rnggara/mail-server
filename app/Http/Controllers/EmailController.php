@@ -45,8 +45,8 @@ class EmailController extends Controller
     public function index(Request $request)
     {
         $query = Email::query();
-        if ($request->filled('status')) $query->where('status', $request->string('status'));
-        if ($request->filled('domain')) $query->whereHas('domain', fn($q) => $q->where('name', $request->string('domain')));
+        if ($request->filled('status')) $query->where('status', $request->status);
+        if ($request->filled('domain')) $query->whereHas('domain', fn($q) => $q->where('name', $request->domain));
         return response()->json($query->orderByDesc('id')->paginate(20));
     }
 }
