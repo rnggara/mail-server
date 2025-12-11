@@ -31,6 +31,11 @@ class SendEmailJob implements ShouldQueue
         $rendered = $renderer->render($email->template_code, $email->variables ?? [], $email->html, $email->text, $email->subject);
 
         $mailable = new TransactionalMailable($rendered['subject'], $rendered['html'], $rendered['text']);
+        $fromAddress = $email->from ?? config('mail.from.address');
+        $fromName = $email->from_name ?? config('mail.from.name');
+        if ($fromAddress) {
+            $mailable->from($fromAddress, $fromName);
+        }
 
         try {
             $to = $email->to ?? [];
@@ -49,4 +54,3 @@ class SendEmailJob implements ShouldQueue
         }
     }
 }
-

@@ -19,6 +19,7 @@ class EmailService
         $email = Email::create([
             'domain_id' => $domain ? $domain->id : null,
             'from' => $data['from'] ?? ($domain ? $domain->default_from : null),
+            'from_name' => $data['from_name'] ?? null,
             'to' => $data['to'],
             'cc' => $data['cc'] ?? [],
             'bcc' => $data['bcc'] ?? [],

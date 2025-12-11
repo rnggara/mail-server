@@ -13,6 +13,7 @@ class EmailController extends Controller
         $validated = $request->validate([
             'domain' => ['nullable','string'],
             'from' => ['nullable','string'],
+            'from_name' => ['nullable','string','max:255'],
             'to' => ['required','array','min:1'],
             'to.*' => ['email'],
             'cc' => ['array'],
@@ -50,4 +51,3 @@ class EmailController extends Controller
         return response()->json($query->orderByDesc('id')->paginate(20));
     }
 }
-

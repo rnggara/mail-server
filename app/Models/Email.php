@@ -10,7 +10,7 @@ class Email extends Model
     use HasFactory;
 
     protected $fillable = [
-        'domain_id','from','to','cc','bcc','subject','html','text','reply_to','template_code','variables','status','provider_message_id','error','requested_at','sent_at','retries','idempotency_key'
+        'domain_id','from','from_name','to','cc','bcc','subject','html','text','reply_to','template_code','variables','status','provider_message_id','error','requested_at','sent_at','retries','idempotency_key'
     ];
 
     protected $casts = [
@@ -32,4 +32,3 @@ class Email extends Model
         return $this->hasMany(Attachment::class);
     }
 }
-
