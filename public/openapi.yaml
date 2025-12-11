@@ -1,0 +1,65 @@
+openapi: 3.0.3
+info:
+  title: Mail Server API
+  version: 1.0.0
+paths:
+  /api/emails:
+    post:
+      summary: Kirim email
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                domain: { type: string }
+                from: { type: string }
+                to: { type: array, items: { type: string, format: email } }
+                subject: { type: string }
+                html: { type: string }
+                text: { type: string }
+                reply_to: { type: string }
+                template_code: { type: string }
+                variables: { type: object }
+                attachments:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      filename: { type: string }
+                      mime: { type: string }
+                      content_base64: { type: string }
+      responses:
+        '202':
+          description: Diterima
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  email_id: { type: integer }
+  /api/emails/{id}:
+    get:
+      summary: Status email
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: integer }
+      responses:
+        '200':
+          description: OK
+  /api/emails:
+    get:
+      summary: Daftar email
+      responses:
+        '200': { description: OK }
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-Api-Key
